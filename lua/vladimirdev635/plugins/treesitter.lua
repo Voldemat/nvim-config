@@ -24,9 +24,10 @@ return {
                     "helm",
                     "gotmpl",
                     "bash",
-                    "graphql"
+                    "graphql",
+                    "rust"
                 },
-                highlight = { enable = true },
+                highlight = { enable = true, disable = {"latex",} },
                 indent = { enable = true },
             }
         end

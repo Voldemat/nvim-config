@@ -8,3 +8,6 @@ vim.opt.colorcolumn = '80'
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("catppuccin-mocha")
 vim.opt.clipboard = 'unnamed'
+vim.opt.modeline = true
+vim.keymap.set("i", "<C-c>", "∘", {noremap = true, silent = true})
+vim.keymap.set("n", "<C-c>", "i∘<Esc>", { noremap = true, silent = true })

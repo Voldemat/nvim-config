@@ -1,4 +1,4 @@
-vim.lsp.config('pyright', {
+vim.lsp.config('basedpyright', {
     settings = {
         python = {
             analysis = {
@@ -12,4 +12,4 @@ vim.lsp.config('pyright', {
         }
     }
 })
-vim.lsp.enable('pyright')
+vim.lsp.enable('basedpyright')

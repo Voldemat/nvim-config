@@ -8,7 +8,8 @@ return {
                     ["@module"] = { fg = colors.lavender },
                     ["@property"] = { fg = colors.lavender },
                     ["@variable.member"] = { fg = colors.lavender },
-                    ["@type.builtin"] = { fg = colors.yellow }
+                    ["@type.builtin"] = { fg = colors.yellow },
+                    ["@constructor.typescript"] = { fg = colors.blue }
                 }
             end,
             integrations = {

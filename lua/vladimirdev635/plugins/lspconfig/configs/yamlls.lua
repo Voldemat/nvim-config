@@ -6,7 +6,7 @@ vim.lsp.config('yamlls', {
             format = {
                 enable = true,
                 singleQuote = true,
-                printWidth = 4
+                printWidth = 2
             },
             schemas = {
                 kubernetes = {
@@ -16,7 +16,7 @@ vim.lsp.config('yamlls', {
                     'templates/*/*/*/*.yaml'
                 }
             }
-        }
+        },
     },
     capabilities = {
         workspace = {
