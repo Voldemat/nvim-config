@@ -25,7 +25,8 @@ return {
                     "gotmpl",
                     "bash",
                     "graphql",
-                    "rust"
+                    "rust",
+                    "vrl"
                 },
                 highlight = { enable = true, disable = {"latex",} },
                 indent = { enable = true },

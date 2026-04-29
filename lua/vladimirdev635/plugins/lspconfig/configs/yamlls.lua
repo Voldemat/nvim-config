@@ -10,10 +10,10 @@ vim.lsp.config('yamlls', {
             },
             schemas = {
                 kubernetes = {
-                    'templates/*/*.yaml',
-                    'templates/*.yaml',
-                    'templates/*/*/*.yaml',
-                    'templates/*/*/*/*.yaml'
+                    'helm/*/templates/*/*.yaml',
+                    'helm/*/templates/*.yaml',
+                    'helm/*/templates/*/*/*.yaml',
+                    'helm/*/templates/*/*/*/*.yaml'
                 }
             }
         },
