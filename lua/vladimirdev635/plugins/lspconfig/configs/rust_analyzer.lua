@@ -6,7 +6,10 @@ vim.lsp.config('rust_analyzer', {
             },
             imports = {
                 prefix = "self"
-            }
+            },
+            check = {
+                command = "clippy",
+            },
         },
     },
     capabilities = {
@@ -14,7 +17,7 @@ vim.lsp.config('rust_analyzer', {
             completion = {
                 completionItem = {
                     snippetSupport = false
-                 }
+                }
             }
         }
     }

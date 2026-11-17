@@ -25,10 +25,10 @@ return {
                 "helm",
                 "gotmpl",
                 "bash",
-                "graphql",
                 "rust",
                 "vrl",
-                "toml"
+                "toml",
+                "selinux"
             )
             vim.api.nvim_create_autocmd("FileType", {
                 group = vim.api.nvim_create_augroup("tree-sitter-enable", { clear = true }),

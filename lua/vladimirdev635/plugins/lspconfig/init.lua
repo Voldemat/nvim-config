@@ -6,7 +6,44 @@ vim.keymap.set('n', '[g', function()
     vim.diagnostic.open_float()
 end)
 vim.keymap.set('n', '<leader>g', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+local function open_buffer_at_bottom(line)
+    local source_bufnr = vim.api.nvim_get_current_buf()
+    -- 1. Create a new unlisted scratch buffer (false, true = listed, scratch)
+    local bufnr = vim.api.nvim_create_buf(false, true)
+
+    -- 2. Set the lines in the new buffer
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { line })
+
+    -- 3. Open a horizontal split below the current window
+    local win = vim.api.nvim_open_win(bufnr, true, {
+        height = 3, -- Specify the height in rows
+        anchor = 'NW',
+        title = 'LSP Rename',
+        relative = 'cursor',
+        width = #line + 5,
+        col = 0,
+        row = 1,
+        style = 'minimal',
+        border = 'rounded',
+    })
+
+    -- 4. Assign the buffer to the current window
+    vim.api.nvim_win_set_buf(win, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, "W", function()
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 1, true)
+        local value = lines[1]
+        vim.api.nvim_win_close(win, true)
+        vim.api.nvim_buf_delete(bufnr, {})
+        vim.lsp.buf.rename(value, {
+            bufnr = source_bufnr
+        })
+    end, {})
+    vim.keymap.set('n', 'q', ':close<CR>', { buffer = bufnr, silent = true })
+end
+vim.keymap.set('n', '<leader>rn', function()
+    local cword = vim.fn.expand('<cword>')
+    open_buffer_at_bottom(cword)
+end)
 
 --- @param qf_entry vim.quickfix.entry
 --- @return lsp.Location?
@@ -74,14 +111,19 @@ local function check_code_action_support()
     return false
 end
 vim.keymap.set('n', '<leader>ac', vim.lsp.buf.code_action)
+local conform = require('conform')
+local otter_format = require('vladimirdev635.otter_format')
 vim.keymap.set('n', '<leader>af', function()
+    if otter_format.format_code_block() then
+        return
+    end
     if check_code_action_support() then
         vim.lsp.buf.code_action({
             context = { only = { "source.organizeImports" } },
             apply = true,
         })
     end
-    vim.lsp.buf.format({ async = true })
+    conform.format({ async = true, lsp_format = 'fallback' })
 end, { desc = "LSP: Organize imports and format buffer" })
 vim.keymap.set('n', 'K', function()
     vim.lsp.buf.hover({

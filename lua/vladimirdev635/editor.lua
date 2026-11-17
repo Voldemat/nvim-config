@@ -9,3 +9,4 @@ vim.opt.termguicolors = true
 vim.cmd.colorscheme("catppuccin-mocha")
 vim.opt.clipboard = 'unnamed'
 vim.opt.modeline = true
+vim.cmd("syntax off")

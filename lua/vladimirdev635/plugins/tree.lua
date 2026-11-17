@@ -14,6 +14,8 @@ return {
                 filters = { dotfiles = false }
             }
             vim.keymap.set('n', '<leader>tf', ':NvimTreeFindFile<cr>', {})
+            vim.keymap.set('n', '<leader>tc', ':NvimTreeClose<cr>', {})
+            vim.keymap.set('n', '<leader>ta', ':NvimTreeOpen<cr>', {})
         end
     }
 }
